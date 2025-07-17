@@ -1,0 +1,13 @@
+{% include "components/nav.html" %}
+
+
+<!-- MAIN CONTENT -->
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h3 class="card-title">Welcome, {{ request.user.profile.full_name }}!</h3>
+      <p class="mb-1"><strong>Username:</strong> {{ request.user.username }}</p>
+      <p class="mb-3"><strong>Email:</strong> {{ request.user.email }}</p>
+    </div>
+  </div>
+</div>
