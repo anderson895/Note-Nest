@@ -65,22 +65,31 @@
       {% endif %}
     </div>
 
-    <!-- Post Content -->
-    <p class="mb-2">{{ post.note }}</p>
+  <!-- Post Content -->
+<p class="mb-2">{{ post.note }}</p>
 
 {% if post.attachment %}
-    {% with post.attachment.name|lower as file_name %}
-        {% if ".jpg" in file_name or ".jpeg" in file_name or ".png" in file_name or ".gif" in file_name or ".webp" in file_name %}
-            <img src="{{ post.attachment.url }}" class="img-fluid rounded mb-2" alt="Image Attachment">
-        {% elif ".pdf" in file_name %}
-            <iframe src="{{ post.attachment.url }}" class="w-100 rounded mb-2" height="400"></iframe>
-        {% else %}
-            <a href="{{ post.attachment.url }}" class="btn btn-outline-secondary btn-sm rounded-pill" download>
-                Download Attachment
-            </a>
-        {% endif %}
-    {% endwith %}
+  {% with post.attachment.name|lower as file_name %}
+    
+    {% if ".jpg" in file_name or ".jpeg" in file_name or ".png" in file_name or ".gif" in file_name or ".webp" in file_name %}
+      <!-- Show image preview -->
+      <img src="{{ post.attachment.url }}" class="img-fluid rounded mb-2" alt="Image Attachment">
+    {% else %}
+      <!-- Show file icon for non-image files -->
+      <div class="d-flex align-items-center gap-2 mb-2">
+        <span class="material-icons text-secondary">insert_drive_file</span>
+        <span>{{ post.attachment.name|cut:"attachments/" }}</span>
+      </div>
+    {% endif %}
+
+    <!-- Download Button -->
+    <a href="{{ post.attachment.url }}" class="btn btn-outline-secondary btn-sm rounded-pill" download>
+      Download Attachment
+    </a>
+
+  {% endwith %}
 {% endif %}
+
 
 
   </div>
@@ -90,3 +99,6 @@
 {% endfor %}
 
 </div>
+
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
